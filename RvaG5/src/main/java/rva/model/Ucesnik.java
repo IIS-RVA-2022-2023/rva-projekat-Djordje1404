@@ -3,12 +3,14 @@ package rva.model;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
+@Entity
 public class Ucesnik implements Serializable {
 
 	/**
@@ -25,7 +27,7 @@ public class Ucesnik implements Serializable {
 	private String MBR;
 	private String status;
 	
-	@OneToMany(mappedBy = "ucensik")
+	@OneToMany(mappedBy = "ucesnik")
 	private List<Rociste> rocista;
 	
 	
