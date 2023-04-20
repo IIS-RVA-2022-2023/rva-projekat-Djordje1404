@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import rva.model.Predmet;
 import rva.model.Rociste;
 import rva.model.Ucesnik;
 import rva.repository.RocisteRepository;
 
+@Service
 public class RocisteService {
 	@Autowired
 	private RocisteRepository repo;
