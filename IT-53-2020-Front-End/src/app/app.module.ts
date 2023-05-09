@@ -17,6 +17,14 @@ import { AuthorComponent } from './components/utility/author/author.component';
 import { AboutComponent } from './components/utility/about/about.component';
 import { HomeComponent } from './components/utility/home/home.component';
 import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { SudDialogComponent } from './components/dialogs/sud-dialog/sud-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +34,8 @@ import {HttpClientModule} from '@angular/common/http';
     PredmetComponent,
     AuthorComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SudDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +47,14 @@ import {HttpClientModule} from '@angular/common/http';
     MatListModule,
     MatGridListModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

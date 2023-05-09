@@ -1,1 +1,1 @@
-export const SUD_URL = 'http//localhost:8081/sud'
+export const SUD_URL = 'http://localhost:8081/sud'
