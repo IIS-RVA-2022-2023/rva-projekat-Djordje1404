@@ -1,4 +1,3 @@
-import { UcesnikDialogComponent } from './../../dialogs/ucesnik-dialog/ucesnik-dialog.component';
 import { UcesnikService } from './../../../service/ucesnik.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,6 +5,7 @@ import { Ucesnik } from 'src/app/models/ucesnik';
 import { Subscription } from 'rxjs';
 import { ParseFlags } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
+import { UcesnikDialogComponent } from '../../dialogs/ucensik-dialog/ucesnik-dialog.component';
 
 
 @Component({
