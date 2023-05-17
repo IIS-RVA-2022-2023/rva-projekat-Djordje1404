@@ -1,11 +1,12 @@
 import { UcesnikService } from './../../../service/ucesnik.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Ucesnik } from 'src/app/models/ucesnik';
 import { Subscription } from 'rxjs';
 import { ParseFlags } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
+import { Ucesnik } from 'src/app/models/ucesnik';
 import { UcesnikDialogComponent } from '../../dialogs/ucensik-dialog/ucesnik-dialog.component';
+//import 'tslib';
 
 
 @Component({
@@ -37,6 +38,15 @@ export class UcesnikComponent implements OnInit,OnDestroy{
         )
       ,(error: Error) => {console.log(error.name + ' ' + error.message);
     };
+    // this.subscription = this.UcesnikService.getAllUcesniks().subscribe(
+    //   (data: Ucesnik[]) => {
+    //     this.dataSource = new MatTableDataSource(data);
+    //   },
+    //   (error: Error) => {
+    //     console.log(error.name + ' ' + error.message);
+    //   }
+    // );
+    
   }
 
   public openDialog(flag:number, id?:number, ime?:string, prezime?:string, mbr?:string, status?:string):void{
@@ -49,6 +59,16 @@ export class UcesnikComponent implements OnInit,OnDestroy{
         }
       }
     )
-  
+    /*
+    dialogRef.afterClosed().subscribe(
+      // @ts-ignore
+      result => {
+        if (result == 1) {
+          this.loadData();
+        }
+      }
+    );
+    */
+      
   }
 }

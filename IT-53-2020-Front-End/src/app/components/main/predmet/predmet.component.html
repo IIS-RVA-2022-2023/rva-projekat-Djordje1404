@@ -30,6 +30,11 @@
         <mat-cell *matCellDef="let row" [style.color]="row.aktivan == true ? 'green': 'red' "
         >{{ row.aktivan ? 'Da' : 'Ne'}}</mat-cell>
       </ng-container>
+       <!--Sud-->
+       <ng-container matColumnDef="sud">
+        <mat-header-cell *matHeaderCellDef>Sud</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.sud }}</mat-cell>
+      </ng-container>
       <!-- Action Buttons -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>
