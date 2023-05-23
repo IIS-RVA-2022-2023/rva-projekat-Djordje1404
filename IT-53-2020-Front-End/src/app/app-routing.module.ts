@@ -14,6 +14,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'about', component:AboutComponent},
   {path:'author', component:AuthorComponent},
+  //dodati path za 4 komponentu
   {path:'', redirectTo:'/home', pathMatch:'full'}
 ];
 

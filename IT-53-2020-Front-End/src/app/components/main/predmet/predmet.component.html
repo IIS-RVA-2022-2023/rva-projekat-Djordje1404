@@ -1,5 +1,5 @@
 <mat-toolbar color="accent">
-    <span class="title-center">Sud</span>
+  <span class="title-center">Predmet</span>
 </mat-toolbar>
 
   <div class="container mat-elavation-z8">
@@ -30,8 +30,8 @@
         <mat-cell *matCellDef="let row" [style.color]="row.aktivan == true ? 'green': 'red' "
         >{{ row.aktivan ? 'Da' : 'Ne'}}</mat-cell>
       </ng-container>
-       <!--Sud-->
-       <ng-container matColumnDef="sud">
+      <!--Sud-->
+      <ng-container matColumnDef="sud">
         <mat-header-cell *matHeaderCellDef>Sud</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.sud }}</mat-cell>
       </ng-container>
@@ -54,7 +54,7 @@
       <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
       <mat-row
         style="cursor: pointer;"
-        *matRowDef="let row; columns: displayColumns">
+        *matRowDef="let row; columns: displayColumns" (click)="selectRow(row)">
       </mat-row>
     </mat-table>
   </div>

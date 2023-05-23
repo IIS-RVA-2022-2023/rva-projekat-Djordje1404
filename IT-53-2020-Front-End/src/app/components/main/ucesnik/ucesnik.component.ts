@@ -59,16 +59,16 @@ export class UcesnikComponent implements OnInit,OnDestroy{
         }
       }
     )
-    /*
-    dialogRef.afterClosed().subscribe(
-      // @ts-ignore
-      result => {
-        if (result == 1) {
-          this.loadData();
-        }
-      }
-    );
-    */
+    
+    // dialogRef.afterClosed().subscribe(
+    //   // @ts-ignore
+    //   result => {
+    //     if (result == 1) {
+    //       this.loadData();
+    //     }
+    //   }
+    // );
+    
       
   }
 }

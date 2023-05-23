@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { PredmetService } from './../../../service/predmet.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +20,7 @@ export class PredmetComponent {
 
   subscription!:Subscription;
 
+  parentSelectedPredmet!:Predmet;
 
   constructor(private PredmetService: PredmetService,
               public dialog:MatDialog){}
@@ -33,7 +35,8 @@ export class PredmetComponent {
     this.subscription = this.PredmetService.getAllPredmets().subscribe(
       data => {
         //console.log(data);}
-        this.dataSource = new MatTableDataSource(data);}
+        this.dataSource = new MatTableDataSource(data);
+        }
         )
       ,(error: Error) => {console.log(error.name + ' ' + error.message);
     };
@@ -50,4 +53,38 @@ export class PredmetComponent {
     )
   
   }
+
+  public selectRow(row:Predmet):void{
+    this.parentSelectedPredmet = row;
+  }
+
+  
 }
+
+// u 4. komponenti  components.ts
+//   @input() childSelectedPredmet!: Predmet;
+
+// 4.komp component.html dole skroz
+//   <div class="container mat-elevation-z8"
+//   <app-4.komp 
+//   *ngIf="parentSelectedPredmet" 
+//   [chiledSelectedPredmet] = "parentSelectedPredmet">
+//   </app-4.komp>
+//   </div>
+
+//4. komp service ts
+// public getStavkeForPorudzbina(idPorudzbine:number):Observable<any>{
+//   return this.HttpClient.get(`STAVKE_ZA_PORUDZBINU_URL/$(idStavke)`)
+// }
+
+//4.komp comp ts
+//izmeniti nesto u public loadData()
+
+//4. komp comp ts
+// implements OnInit, OnDestroy, OnChanges 
+//import metoda za OnChanges
+
+//u ngOnChanges metodi:
+// if(this.childSelectedPorudzbina.id){
+//   this.loadData();
+// }
