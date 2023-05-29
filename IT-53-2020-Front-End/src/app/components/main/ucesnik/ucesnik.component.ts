@@ -1,11 +1,14 @@
 import { UcesnikService } from './../../../service/ucesnik.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ParseFlags } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
 import { Ucesnik } from 'src/app/models/ucesnik';
 import { UcesnikDialogComponent } from '../../dialogs/ucensik-dialog/ucesnik-dialog.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 //import 'tslib';
 
 
@@ -19,6 +22,9 @@ export class UcesnikComponent implements OnInit,OnDestroy{
   dataSource!: MatTableDataSource<Ucesnik>;
 
   subscription!:Subscription;
+
+  @ViewChild(MatSort,{static:false}) sort!:MatSort; //dodati za ostale komp
+  @ViewChild(MatPaginator,{static:false}) paginator!:MatPaginator;
 
 
   constructor(private UcesnikService: UcesnikService,
@@ -34,7 +40,9 @@ export class UcesnikComponent implements OnInit,OnDestroy{
     this.subscription = this.UcesnikService.getAllUcesniks().subscribe(
       data => {
         //console.log(data);}
-        this.dataSource = new MatTableDataSource(data);}
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;}
         )
       ,(error: Error) => {console.log(error.name + ' ' + error.message);
     };
@@ -71,4 +79,11 @@ export class UcesnikComponent implements OnInit,OnDestroy{
     
       
   }
+
+  public applyFilter(filter:any){
+    filter = filter.target.value;
+    filter = filter.trim();
+    filter = filter.toLocalLowerCase();
+    this.dataSource.filter = filter;
+  } //dodati i za ostale komponente
 }

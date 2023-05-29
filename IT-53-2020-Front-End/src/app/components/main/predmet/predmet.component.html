@@ -3,6 +3,9 @@
 </mat-toolbar>
 
   <div class="container mat-elavation-z8">
+    <mat-form-field>
+      <input matInput placeholder="Pretraga predmeta" name="pretraga" (keyup)="applyFilter($event)"/>
+    </mat-form-field>
     <mat-table #table [dataSource]="dataSource" class="mat-cell">
       <!--BROJ PREDMETA-->
       <ng-container matColumnDef="brojPr">
@@ -57,4 +60,14 @@
         *matRowDef="let row; columns: displayColumns" (click)="selectRow(row)">
       </mat-row>
     </mat-table>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5,10,20]">
+      
+    </mat-paginator>
+
+    <div class="container mat-elevation-z8">
+      <app-rociste
+      *ngIf="parentSelectedPredmet"
+      [childSelectedPredmet]="parentSelectedPredmet">
+    </app-rociste>
+    </div>
   </div>

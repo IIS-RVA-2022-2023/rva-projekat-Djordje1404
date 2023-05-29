@@ -6,6 +6,7 @@ import { UcesnikComponent } from './components/main/ucesnik/ucesnik.component';
 import { AboutComponent } from './components/utility/about/about.component';
 import { AuthorComponent } from './components/utility/author/author.component';
 import { HomeComponent } from './components/utility/home/home.component';
+import { RocisteComponent } from './components/main/rociste/rociste.component';
 
 const routes: Routes = [
   {path:'sud', component:SudComponent},
@@ -14,7 +15,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'about', component:AboutComponent},
   {path:'author', component:AuthorComponent},
-  //dodati path za 4 komponentu
+  {path: 'rociste', component:RocisteComponent},
   {path:'', redirectTo:'/home', pathMatch:'full'}
 ];
 

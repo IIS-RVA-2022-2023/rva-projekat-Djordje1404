@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { PredmetService } from './../../../service/predmet.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Predmet } from 'src/app/models/predmet';
 import { PredmetDialogComponent } from '../../dialogs/predmet-dialog/predmet-dialog.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
  
 
 @Component({
@@ -19,6 +21,9 @@ export class PredmetComponent {
   displayColumns = ['id', 'brojPr', 'opis', 'datumPocetka', 'aktivan', 'sud', 'actions']
 
   subscription!:Subscription;
+
+  @ViewChild(MatSort,{static:false}) sort!:MatSort; //dodati za ostale komp
+  @ViewChild(MatPaginator,{static:false}) paginator!:MatPaginator;
 
   parentSelectedPredmet!:Predmet;
 
@@ -36,6 +41,8 @@ export class PredmetComponent {
       data => {
         //console.log(data);}
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         }
         )
       ,(error: Error) => {console.log(error.name + ' ' + error.message);
@@ -54,6 +61,13 @@ export class PredmetComponent {
   
   }
 
+  public applyFilter(filter:any){
+    filter = filter.target.value;
+    filter = filter.trim();
+    filter = filter.toLocalLowerCase();
+    this.dataSource.filter = filter;
+  } //dodati i za ostale komponente
+
   public selectRow(row:Predmet):void{
     this.parentSelectedPredmet = row;
   }
@@ -61,30 +75,4 @@ export class PredmetComponent {
   
 }
 
-// u 4. komponenti  components.ts
-//   @input() childSelectedPredmet!: Predmet;
 
-// 4.komp component.html dole skroz
-//   <div class="container mat-elevation-z8"
-//   <app-4.komp 
-//   *ngIf="parentSelectedPredmet" 
-//   [chiledSelectedPredmet] = "parentSelectedPredmet">
-//   </app-4.komp>
-//   </div>
-
-//4. komp service ts
-// public getStavkeForPorudzbina(idPorudzbine:number):Observable<any>{
-//   return this.HttpClient.get(`STAVKE_ZA_PORUDZBINU_URL/$(idStavke)`)
-// }
-
-//4.komp comp ts
-//izmeniti nesto u public loadData()
-
-//4. komp comp ts
-// implements OnInit, OnDestroy, OnChanges 
-//import metoda za OnChanges
-
-//u ngOnChanges metodi:
-// if(this.childSelectedPorudzbina.id){
-//   this.loadData();
-// }

@@ -14,6 +14,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { SudComponent } from './components/main/sud/sud.component';
 import { UcesnikComponent } from './components/main/ucesnik/ucesnik.component';
 import { PredmetComponent } from './components/main/predmet/predmet.component';
+import { RocisteComponent } from './components/main/rociste/rociste.component';
 import { AuthorComponent } from './components/utility/author/author.component';
 import { AboutComponent } from './components/utility/about/about.component';
 import { HomeComponent } from './components/utility/home/home.component';
@@ -33,6 +34,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { RocisteDialogComponent } from './components/dialogs/rociste-dialog/rociste-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +42,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SudComponent,
     UcesnikComponent,
     PredmetComponent,
+    RocisteComponent,
     AuthorComponent,
     AboutComponent,
     HomeComponent,
     SudDialogComponent,
     UcesnikDialogComponent,
-    PredmetDialogComponent
+    PredmetDialogComponent,
+    RocisteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCheckboxModule,
     MatSortModule,
     MatPaginatorModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

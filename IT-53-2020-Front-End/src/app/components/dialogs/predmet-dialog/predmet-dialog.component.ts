@@ -37,26 +37,26 @@ export class PredmetDialogComponent implements OnInit{
   public add():void{
     this.predmetService.addPredmet(this.data).subscribe(
       () => {
-        this.snackBar.open('Predmet sa nazivom: ' + this.data.brojPr + 'je uspesno kreiran',
+        this.snackBar.open('Predmet sa nazivom: ' + this.data.brojPr + 'je uspešno kreiran',
         'Ok', {duration:3500})
       }
     ),
     (error:Error) => {
       console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Kreiranje predmeta je neuspesno', 'Ok', {duration:2500});
+      this.snackBar.open('Kreiranje predmeta je neuspešno', 'Ok', {duration:2500});
     }
   }
 
   public update():void{
     this.predmetService.updatePredmet(this.data).subscribe(
       () => {
-        this.snackBar.open('Predmet sa ID: ' + this.data.id + 'je uspesno modifikovan',
+        this.snackBar.open('Predmet sa ID: ' + this.data.id + 'je uspešno modifikovan',
         'Ok', {duration:3500})
       }
     ),
     (error:Error) => {
       console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Modifikovanje Predmeta je neuspesno', 'Ok', {duration:2500});
+      this.snackBar.open('Modifikovanje predmeta je neuspešno', 'Ok', {duration:2500});
     }
   }
 
