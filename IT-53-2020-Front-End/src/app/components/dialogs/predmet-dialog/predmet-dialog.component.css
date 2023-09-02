@@ -1,7 +1,8 @@
 .container{
     display: flex;
     flex-direction: column;
-    min-width: 450px;
+    min-width: max-content;
+    align-items: center;
 }
 
 .form{
@@ -11,4 +12,13 @@
 .mat-form-field{
     font-size: 16px;
     flex-grow: 1;
+    
+}
+
+.input{
+    margin-left: 18px;
+}
+
+.active{
+    margin-left: 11px;
 }

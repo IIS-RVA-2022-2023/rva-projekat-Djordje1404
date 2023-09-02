@@ -29,7 +29,7 @@ export class UcesnikDialogComponent {
       }
     ),
     (error:Error) => {
-      console.log(error.name + ' ' + error.message);
+      console.log(error.name + ' ' + error.message)
       this.snackBar.open('Kreiranje ucesnika je neuspesno', 'Ok', {duration:2500});
     }
   }
@@ -50,12 +50,12 @@ export class UcesnikDialogComponent {
   public delete():void{
     this.UcesnikService.deleteUcesnik(this.data.id).subscribe(
       () => {
-        this.snackBar.open('Ucesnik sa ID: ' + this.data.id + 'je uspesno obrisan',
+        this.snackBar.open('Ucesnik sa ID: ' + this.data.id + ' je uspesno obrisan',
         'Ok', {duration:3500})
       }
     ),
     (error:Error) => {
-      console.log(error.name + ' ' + error.message);
+      console.log(error.name + ' ' + error.message)
       this.snackBar.open('Brisanje ucesnika je neuspesno', 'Ok', {duration:2500});
     }
   }

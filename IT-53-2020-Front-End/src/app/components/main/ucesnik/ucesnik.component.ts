@@ -10,15 +10,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
 
-//import 'tslib';
-
-
 @Component({
   selector: 'app-ucesnik',
   templateUrl: './ucesnik.component.html',
   styleUrls: ['./ucesnik.component.css']
 })
-export class UcesnikComponent implements OnInit,OnDestroy{
+export class UcesnikComponent implements OnInit, OnDestroy{
   displayedColumns = ['id', 'ime', 'prezime', 'mbr', 'status', 'actions'];
   dataSource!: MatTableDataSource<Ucesnik>;
 
@@ -27,6 +24,7 @@ export class UcesnikComponent implements OnInit,OnDestroy{
   @ViewChild(MatSort,{static:false}) sort!:MatSort; //dodati za ostale komp
   @ViewChild(MatPaginator,{static:false}) paginator!:MatPaginator;
 
+  parentSelectedUcesnik!: Ucesnik;
 
   constructor(private UcesnikService: UcesnikService,
               public dialog:MatDialog){}
@@ -79,6 +77,10 @@ export class UcesnikComponent implements OnInit,OnDestroy{
     // );
     
       
+  }
+
+  public selectRow(row:Ucesnik):void{
+    this.parentSelectedUcesnik = row;
   }
 
   public applyFilter(filter:any){

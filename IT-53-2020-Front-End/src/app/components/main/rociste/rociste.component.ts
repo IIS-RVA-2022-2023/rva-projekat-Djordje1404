@@ -18,14 +18,15 @@ import { MatPaginator } from "@angular/material/paginator";
   })
   export class RocisteComponent implements OnInit,OnDestroy,OnChanges {
   
+    
+    displayedColumns = ['id','datumRocista','sudnica','predmet','actions'];
     dataSource!: MatTableDataSource<Rociste>;
-    displayedColumns = ['id','datumRocista','sudnica','ucesnik','predmet','actions'];
     subscription!:Subscription;
 
     @ViewChild(MatSort,{static:false}) sort!:MatSort; 
     @ViewChild(MatPaginator,{static:false}) paginator!:MatPaginator;
   
-    @Input() childSelectedPredmet!: Predmet;
+    @Input() childSelectedUcesnik!: Ucesnik;
   
     constructor(private rocisteService: RocisteService,
                 public dialog: MatDialog){
@@ -33,10 +34,11 @@ import { MatPaginator } from "@angular/material/paginator";
     }
   
     ngOnChanges(changes: SimpleChanges): void {
-      if(this.childSelectedPredmet.id){
+      if(this.childSelectedUcesnik.id){
         this.loadData();
       }
     }
+    
     ngOnDestroy(): void {
       this.subscription.unsubscribe();
     }
@@ -46,32 +48,33 @@ import { MatPaginator } from "@angular/material/paginator";
     }
   
     public loadData(){
-      this.subscription = this.rocisteService.getRocistaForPredmet(this.childSelectedPredmet.id).subscribe(
-        data => {this.dataSource = new MatTableDataSource(data);
+      this.subscription = this.rocisteService.getRocistaforUcesnik(this.childSelectedUcesnik.id).subscribe(
+        data => {
+          this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-                console.log(data)}),
-        (error:Error) => {console.log(error.name + ' ' + error.message);}
+                // console.log(data)
+        }),
+        (error:Error) => {console.log(error.name + ' ' + error.message)};
     }
   
-    public openDialog(flag:number, id?:number, datumRocista?:Date, sudnica?:string, ucesnik?:Ucesnik, predmet?:Predmet):void{
-      const dialogRef = this.dialog.open(RocisteDialogComponent, {data:{id,datumRocista,sudnica,ucesnik,predmet}});
+    public openDialog(flag:number, id?:number, datumRocista?:Date, sudnica?:string, predmet?:Predmet):void{
+      const dialogRef = this.dialog.open(RocisteDialogComponent, {data:{id,datumRocista,sudnica,predmet}});
       dialogRef.componentInstance.flag = flag;
-      dialogRef.componentInstance.data.predmet = this.childSelectedPredmet;
+      dialogRef.componentInstance.data.ucesnik = this.childSelectedUcesnik;
       dialogRef.afterClosed().subscribe(
         result =>{
           if(result == 1){
             this.loadData();
           }
         }
-      )
+      );
     }
 
     public applyFilter(filter:any){
       filter = filter.target.value;
       filter = filter.trim();
-      filter = filter.toLocalLowerCase();
+      filter = filter.toLocaleLowerCase();
       this.dataSource.filter = filter;
-      
-    } 
+    }
   }

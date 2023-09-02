@@ -16,7 +16,7 @@ export class PredmetService {
   }
 
   public addPredmet(predmet:Predmet):Observable<any>{
-    return this.httpClient.post(`${PREDMET_URL}/${predmet.id}`, predmet);
+    return this.httpClient.post(`${PREDMET_URL}`, predmet);
   }
 
   public updatePredmet(predmet:Predmet):Observable<any>{

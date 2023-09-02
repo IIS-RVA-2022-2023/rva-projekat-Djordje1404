@@ -31,7 +31,7 @@ public class Predmet implements Serializable {
 	private String brojPr;
 	private String opis;
 	private Date datumPocetka;
-	private Boolean aktivan;
+	private boolean aktivan;
 	
 	@ManyToOne
 	@JoinColumn(name = "sud")
@@ -45,6 +45,33 @@ public class Predmet implements Serializable {
 		
 	}
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public String getBrojPr() {
+		return brojPr;
+	}
+	public void setBrojPr(String brojPr) {
+		this.brojPr = brojPr;
+	}
+	
+	public Date getDatumPocetka() {
+		return datumPocetka;
+	}
+	public void setDatumPocetka(Date datumPocetka) {
+		this.datumPocetka = datumPocetka;
+	}
+	
+	public boolean getAktivan() {
+		return aktivan;
+	}
+	public void setAktivan(Boolean aktivan) {
+		this.aktivan = aktivan;
+	}
 	
 	public Sud getSud() {
 		return sud;
@@ -64,43 +91,24 @@ public class Predmet implements Serializable {
 	public void setRocista(List<Rociste> rocista) {
 		this.rocista = rocista;
 	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getBrojPr() {
-		return brojPr;
-	}
-	public void setBrojPr(String brojPr) {
-		this.brojPr = brojPr;
-	}
+	
 	public String getOpis() {
 		return opis;
 	}
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-	public Date getDatumPocetka() {
-		return datumPocetka;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-	public void setDatumPocetka(Date datumPocetka) {
-		this.datumPocetka = datumPocetka;
-	}
-	public Boolean getAktivan() {
-		return aktivan;
-	}
-	public void setAktivan(Boolean aktivan) {
-		this.aktivan = aktivan;
-	}
+
+
+	
+	
+	
+	
+	
 	
 	
 	

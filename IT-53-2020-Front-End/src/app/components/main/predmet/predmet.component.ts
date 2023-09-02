@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { PredmetService } from './../../../service/predmet.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { Predmet } from 'src/app/models/predmet';
 import { PredmetDialogComponent } from '../../dialogs/predmet-dialog/predmet-dialog.component';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { Sud } from 'src/app/models/sud';
  
 
 @Component({
@@ -15,19 +16,20 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './predmet.component.html',
   styleUrls: ['./predmet.component.css']
 })
-export class PredmetComponent {
+export class PredmetComponent implements OnInit, OnDestroy{
   
-  dataSource!: MatTableDataSource<Predmet>;
+  
   displayColumns = ['id', 'brojPr', 'opis', 'datumPocetka', 'aktivan', 'sud', 'actions']
+  dataSource!: MatTableDataSource<Predmet>;
 
   subscription!:Subscription;
 
   @ViewChild(MatSort,{static:false}) sort!:MatSort; //dodati za ostale komp
   @ViewChild(MatPaginator,{static:false}) paginator!:MatPaginator;
 
-  parentSelectedPredmet!:Predmet;
+  //parentSelectedPredmet!:Predmet;
 
-  constructor(private PredmetService: PredmetService,
+  constructor(private predmetService: PredmetService,
               public dialog:MatDialog){}
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -37,27 +39,27 @@ export class PredmetComponent {
   }
 
   public loadData(){
-    this.subscription = this.PredmetService.getAllPredmets().subscribe(
+    this.subscription = this.predmetService.getAllPredmets().subscribe(
       data => {
         //console.log(data);}
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         }
-        )
-      ,(error: Error) => {console.log(error.name + ' ' + error.message);
+      ),
+      (error: Error) => {console.log(error.name + ' ' + error.message)
     };
   }
-  public openDialog(flag:number, id?:number, brojPr?:string, opis?:string, datumPocekta?:Date, aktivan?:boolean):void{
-    const dialogRef = this.dialog.open(PredmetDialogComponent, {data:{id,brojPr,opis, datumPocekta, aktivan}});
-    dialogRef.componentInstance.flag=flag;
+  public openDialog(flag:number, id?:number, brojPr?:string, opis?:string, datumPocekta?:Date, aktivan?:boolean, sud?: Sud):void{
+    const dialogRef = this.dialog.open(PredmetDialogComponent, {data: {id, brojPr, opis, datumPocekta, aktivan, sud}});
+    dialogRef.componentInstance.flag = flag;
     dialogRef.afterClosed().subscribe(
       result => {
         if(result==1){
           this.loadData();
         }
       }
-    )
+    );
   
   }
 
@@ -68,9 +70,9 @@ export class PredmetComponent {
     this.dataSource.filter = filter;
   } //dodati i za ostale komponente
 
-  public selectRow(row:Predmet):void{
-    this.parentSelectedPredmet = row;
-  }
+  // public selectRow(row:Predmet):void{
+  //   this.parentSelectedPredmet = row;
+  // }
 
   
 }

@@ -16,7 +16,7 @@ export class UcesnikService {
   }
 
   public addUcesnik(ucesnik:Ucesnik):Observable<any>{
-    return this.httpClient.post(`${UCESNIK_URL}/${ucesnik.id}`, ucesnik);
+    return this.httpClient.post(`${UCESNIK_URL}`, ucesnik);
   }
 
   public updateUcesnik(ucesnik:Ucesnik):Observable<any>{

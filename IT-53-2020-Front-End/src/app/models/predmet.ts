@@ -7,5 +7,4 @@ export class Predmet{
     datumPocetka!: Date;
     aktivan!: boolean;
     Sud!: Sud;
-datum: any;
 }

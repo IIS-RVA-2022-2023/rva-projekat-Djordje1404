@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Predmet } from 'src/app/models/predmet';
-import { Ucesnik } from 'src/app/models/ucesnik';
-import { UcesnikService } from 'src/app/service/ucesnik.service';
+import { SudService } from 'src/app/service/sud.service';
 import {PredmetService} from './../../../service/predmet.service';
+import { Sud } from 'src/app/models/sud';
 
 @Component({
   selector: 'app-predmet-dialog',
@@ -12,20 +12,20 @@ import {PredmetService} from './../../../service/predmet.service';
   styleUrls: ['./predmet-dialog.component.css']
 })
 export class PredmetDialogComponent implements OnInit{
-  flag!:number;
-  ucesnici!:Ucesnik[];
+  flag!: number;
+  sudovi!: Sud[];
 
   constructor(public snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<Predmet>,
               @Inject(MAT_DIALOG_DATA) public data: Predmet,
               public predmetService: PredmetService,
-              public ucesnikService: UcesnikService){
+              public sudService: SudService){
 
   }
   ngOnInit(): void {
-    this.ucesnikService.getAllUcesniks().subscribe(
+    this.sudService.getAllSuds().subscribe(
       data => {
-        this.ucesnici = data;
+        this.sudovi = data;
       }
     )
   }
@@ -63,13 +63,13 @@ export class PredmetDialogComponent implements OnInit{
   public delete():void{
     this.predmetService.deletePredmet(this.data.id).subscribe(
       () => {
-        this.snackBar.open('Predmet sa ID: ' + this.data.id + 'je uspesno obrisan',
+        this.snackBar.open('Predmet sa ID: ' + this.data.id + ' je uspesno obrisan',
         'Ok', {duration:3500})
       }
     ),
     (error:Error) => {
       console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Brisanje Predmeta je neuspesno', 'Ok', {duration:2500});
+      this.snackBar.open('Brisanje predmeta je neuspesno', 'Ok', {duration:2500});
     }
   }
 

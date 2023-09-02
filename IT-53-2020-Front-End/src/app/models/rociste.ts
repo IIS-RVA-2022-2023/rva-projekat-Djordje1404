@@ -7,6 +7,6 @@ export class Rociste{
     sudnica!: string;
     ucesnik!: Ucesnik;
     predmet!: Predmet;
-datum: any;
-sud: any;
+// datum: any;
+// sud: any;
 }

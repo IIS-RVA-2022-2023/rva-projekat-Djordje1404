@@ -8,7 +8,7 @@ import rva.model.Predmet;
 import rva.model.Sud;
 
 public interface PredmetRepository extends JpaRepository<Predmet,Long>{
-	List<Predmet> findByAktivanTrue();
+	public abstract List<Predmet> findByAktivanTrue();
 	//List<Predmet> findByNumericThanOrderById(double iznos);
 	
 	List<Predmet> findBySud(Sud sud);

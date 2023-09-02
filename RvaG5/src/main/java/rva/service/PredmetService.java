@@ -31,7 +31,7 @@ public class PredmetService {
 	//}
 	
 	//Obelezje boolean
-	public Optional<List<Predmet>> getByAktivan(){
+	public Optional<List<Predmet>> getByAktivanTrue(){
 		Optional<List<Predmet>> lista = Optional.of(repo.findByAktivanTrue());
 		return lista;
 	}

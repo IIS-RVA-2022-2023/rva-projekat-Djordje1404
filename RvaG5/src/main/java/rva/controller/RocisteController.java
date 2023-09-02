@@ -34,8 +34,6 @@ public class RocisteController {
 	@Autowired
 	private UcesnikService ucesnikService;
 	
-	@Autowired
-	private PredmetService predmetService;
 	
 	@GetMapping
 	public ResponseEntity<List<Rociste>> getAll() {
@@ -52,6 +50,18 @@ public class RocisteController {
 		}
 	}
 	
+	@GetMapping("/sudnica/{sudnica}")
+	public ResponseEntity<?> getRocisteBySudnica(@PathVariable String sudnica){
+		List<Rociste> lista = service.getBySud(sudnica).get();
+		
+		if(!service.getBySud(sudnica).get().isEmpty()) {
+			return ResponseEntity.ok(lista);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource with requested value has not been found!");
+		}
+	}
+	
+	
 	@GetMapping("/ucesnik/{id}")
 	public ResponseEntity<?> getRocisteByUcesnik(@PathVariable long id){
 		Optional<Ucesnik> ucesnik = ucesnikService.getById(id);
@@ -63,16 +73,16 @@ public class RocisteController {
 		}
 	}
 	
-	@GetMapping("/predmet/{id}")
-	public ResponseEntity<?> getRocisteByPredmet(@PathVariable long id){
-		Optional<Predmet> predmet = predmetService.getById(id);
-		if(predmet.isPresent()) {
-			return ResponseEntity.ok(service.getByPredmet(predmet.get()));
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Resource with requested sud: " + id + " has not been found");
-		}
-	}
+//	@GetMapping("/predmet/{id}")
+//	public ResponseEntity<?> getRocisteByPredmet(@PathVariable long id){
+//		Optional<Predmet> predmet = predmetService.getById(id);
+//		if(predmet.isPresent()) {
+//			return ResponseEntity.ok(service.getByPredmet(predmet.get()));
+//		}else {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//					.body("Resource with requested sud: " + id + " has not been found");
+//		}
+//	}
 	
 	@PostMapping
 	public ResponseEntity<Rociste> createRociste(@RequestBody Rociste rociste){
@@ -106,8 +116,8 @@ public class RocisteController {
 	public ResponseEntity<?> updateRociste(@RequestBody Rociste rociste, @PathVariable long id){
 		if(service.existsById(id)) {
 			rociste.setId(id);
-			Rociste savedRociste = service.addRociste(rociste);
-			return ResponseEntity.ok(savedRociste);
+			Rociste updatedRociste = service.addRociste(rociste);
+			return ResponseEntity.ok(updatedRociste);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Response with requested ID: " + id + " has not been found");

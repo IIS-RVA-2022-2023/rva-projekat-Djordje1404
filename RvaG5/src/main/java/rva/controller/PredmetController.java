@@ -22,41 +22,42 @@ import rva.model.Sud;
 import rva.service.PredmetService;
 import rva.service.SudService;
 
-//Defaultni resurs za sve mapping anotacije/metode
-@RequestMapping("predmet")
 @CrossOrigin
 @RestController
+//Defaultni resurs za sve mapping anotacije/metode
+@RequestMapping("predmet")
 public class PredmetController {
-	
+
 	@Autowired
 	private PredmetService service;
 	
 	@Autowired
 	private SudService sudService;
 	
+	
 	@GetMapping
-	public ResponseEntity<List<Predmet>> getAll() {
+	public ResponseEntity<?> getAll(){
 		return ResponseEntity.ok(service.getAll());
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping ("/{id}")
 	public ResponseEntity<?> getPredmetById(@PathVariable long id){
+		
 		if(service.existsById(id)) {
 			return ResponseEntity.ok(service.getById(id).get());
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Resource with requested ID: " + id + " has not been found");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
 	
-	@GetMapping("/aktivan/{aktivan}")
+	
+	@GetMapping("/aktivan")
 	public ResponseEntity<?> getPredmetByAktivanTrue(){
-		List<Predmet> lista = service.getByAktivan().get();
-		if(!lista.isEmpty()) {
-			return ResponseEntity.ok(lista);
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Resource have not found" );
+		List<Predmet> lista = service.getByAktivanTrue().get();
+		if(!service.getByAktivanTrue().get().isEmpty()) {
+			return ResponseEntity.ok(lista) ;
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource with true value has not been found!");
 		}
 	}
 	
@@ -65,22 +66,22 @@ public class PredmetController {
 		Optional<Sud> sud = sudService.getById(id);
 		if(sud.isPresent()) {
 			return ResponseEntity.ok(service.getBySud(sud.get()));
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Resource with requested sud: " + id + " has not been found");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The resource with the requested id(" + id + ") has not been found");
 		}
 	}
 	
 	@PostMapping
-	public ResponseEntity<Predmet> createPredmet(@RequestBody Predmet predmet){
+	public ResponseEntity<?> createPredmet(@RequestBody Predmet predmet){
+		
 		Predmet savedPredmet;
 		
 		if(!service.existsById(predmet.getId())) {
 			savedPredmet = service.addPredmet(predmet);
-		}else {
+		} else {
 			List<Predmet> lista = service.getAll();
 			long najvecaVrednost = 1;
-			for(int i = 0; i< lista.size(); i++) {
+			for(int i = 0; i < lista.size(); i++) {
 				if(najvecaVrednost <= lista.get(i).getId()) {
 					najvecaVrednost = lista.get(i).getId();
 				}
@@ -89,38 +90,35 @@ public class PredmetController {
 					najvecaVrednost++;
 				}
 			}
+			
 			predmet.setId(najvecaVrednost);
 			savedPredmet = service.addPredmet(predmet);
-			
-			
 		}
 		
 		URI uri = URI.create("/predmet/" + savedPredmet.getId());
 		return ResponseEntity.created(uri).body(savedPredmet);
 	}
 	
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updatePredmet(@RequestBody Predmet predmet, @PathVariable long id){
+	public ResponseEntity<?> upadatePredmet(@RequestBody Predmet predmet, @PathVariable long id){
+		
 		if(service.existsById(id)) {
 			predmet.setId(id);
-			Predmet savedPredmet = service.addPredmet(predmet);
-			return ResponseEntity.ok(savedPredmet);
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Response with requested ID: " + id + " has not been found");
+			Predmet updatedPredmet = service.addPredmet(predmet);
+			return ResponseEntity.ok(updatedPredmet);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested resource with requested ID: " + id + " has not been found");
 		}
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletePredmet(@PathVariable long id){
+	public ResponseEntity<?> deletePredmet(@PathVariable long id) {
 		if(service.existsById(id)) {
 			service.deleteById(id);
-			return ResponseEntity.ok("Resource with ID: " + id + " has been deleted");
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Resource with requested ID: " + id + " has not been found");
+			return ResponseEntity.ok("Rescourse with ID: " + id + " has been deleted");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested resource with requested ID: " + id + " has not been found");
 		}
 	}
-	
 }
-

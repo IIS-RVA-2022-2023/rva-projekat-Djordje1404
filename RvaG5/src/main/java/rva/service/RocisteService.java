@@ -24,12 +24,14 @@ public class RocisteService {
 		return repo.findById(id);
 	}
 	
-	public Optional<List<Rociste>> getByUcesnik(Ucesnik ucesnik) {
-		return Optional.of(repo.findByUcesnik(ucesnik));
+	public Optional<List<Rociste>> getBySudnica(String sudnica){
+		
+		Optional<List<Rociste>> lista = Optional.of(repo.findBySudnicaContainingIgnoreCase(sudnica));
+		return lista;
 	}
 	
-	public Optional<List<Rociste>> getByPredmet(Predmet predmet) {
-		return Optional.of(repo.findByPredmet(predmet));
+	public Optional<List<Rociste>> getByUcesnik(Ucesnik ucesnik) {
+		return Optional.of(repo.findByUcesnik(ucesnik));
 	}
 	
 	public Rociste addRociste(Rociste rociste) {

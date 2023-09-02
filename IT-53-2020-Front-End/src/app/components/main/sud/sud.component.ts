@@ -1,4 +1,4 @@
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { SudDialogComponent } from './../../dialogs/sud-dialog/sud-dialog.component';
 import { SudService } from './../../../service/sud.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -38,8 +38,8 @@ export class SudComponent implements OnInit,OnDestroy{
       data => {
         //console.log(data);}
         this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort; /*dodati ostalim komp*/ //sort ne dodavati za strane kljuceve u ostalim komp!!!
-      this.dataSource.paginator = this.paginator;} //dodati paginator ostalim
+        this.dataSource.sort = this.sort; /*dodati ostalim komp*/ //sort ne dodavati za strane kljuceve u ostalim komp!!!
+        this.dataSource.paginator = this.paginator;} //dodati paginator ostalim
         )
       ,(error: Error) => {console.log(error.name + ' ' + error.message);
     };
