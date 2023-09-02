@@ -16,7 +16,7 @@ export class SudService {
   }
 
   public addSud(sud:Sud):Observable<any>{
-    return this.httpClient.post(`${SUD_URL}/${sud.id}`, sud);
+    return this.httpClient.post(`${SUD_URL}`, sud);
   }
 
   public updateSud(sud:Sud):Observable<any>{

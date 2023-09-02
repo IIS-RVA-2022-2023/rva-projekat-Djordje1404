@@ -7,3 +7,4 @@ export const ROCISTA_URL = 'http://localhost:8080/rociste/predmet'
 
 //localhost:8080 kod kuce
 //localhost:8081 na fakultetu
+

@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Sud } from 'src/app/models/sud';
-import { onErrorResumeNextWith } from 'rxjs';
+//import { onErrorResumeNextWith } from 'rxjs';
 
 @Component({
   selector: 'app-sud-dialog',
@@ -12,53 +12,49 @@ import { onErrorResumeNextWith } from 'rxjs';
 })
 export class SudDialogComponent {
 
-  flag!:number;
+  flag!: number;
 
   constructor(public snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<Sud>,
               @Inject(MAT_DIALOG_DATA) public data: Sud,
-              public SudService: SudService){
+              public sudService: SudService){
 
   }
 
+
   public add():void{
-    this.SudService.addSud(this.data).subscribe(
+    this.sudService.addSud(this.data).subscribe(
       () => {
-        this.snackBar.open('Sud sa nazivom: ' + this.data.naziv + 'je uspesno kreiran',
+        this.snackBar.open('Sud sa nazivom: ' + this.data.naziv + ' je uspesno kreiran',
         'Ok', {duration:3500})
       }
     ),
-    (error:Error) => {
-      console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Kreiranje suda je neuspesno', 'Ok', {duration:2500});
-    }
+    (error:Error)=>{console.log(error.name + ' ' + error.message)
+    this.snackBar.open('Kreiranje suda je neuspesno', 'Ok', {duration:3500})};
   }
 
   public update():void{
-    this.SudService.updateSud(this.data).subscribe(
+    this.sudService.updateSud(this.data).subscribe(
       () => {
-        this.snackBar.open('Sud sa ID: ' + this.data.id + 'je uspesno modifikovan',
+        this.snackBar.open('Sud sa ID: ' + this.data.id + ' je uspesno modifikovan',
         'Ok', {duration:3500})
       }
     ),
-    (error:Error) => {
-      console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Modifikovanje suda je neuspesno', 'Ok', {duration:2500});
-    }
+    (error:Error)=>{console.log(error.name + ' ' + error.message)
+    this.snackBar.open('Modifikovanje suda je neuspesno', 'Ok', {duration:3500})};
   }
 
   public delete():void{
-    this.SudService.deleteSud(this.data.id).subscribe(
+    this.sudService.deleteSud(this.data.id).subscribe(
       () => {
-        this.snackBar.open('Sud sa ID: ' + this.data.id + 'je uspesno obrisan',
+        this.snackBar.open('Sud je uspesno obrisan',
         'Ok', {duration:3500})
       }
     ),
-    (error:Error) => {
-      console.log(error.name + ' ' + error.message);
-      this.snackBar.open('Brisanje suda je neuspesno', 'Ok', {duration:2500});
-    }
+    (error:Error)=>{console.log(error.name + ' ' + error.message)
+    this.snackBar.open('Brisanje suda je neuspesno', 'Ok', {duration:3500})};
   }
+
 
   public cancel():void{
     this.dialogRef.close();

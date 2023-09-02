@@ -21,7 +21,7 @@ import rva.service.SudService;
 @CrossOrigin
 @RestController
 public class SudController {
-
+	
 	@Autowired
 	private SudService service;
 	
