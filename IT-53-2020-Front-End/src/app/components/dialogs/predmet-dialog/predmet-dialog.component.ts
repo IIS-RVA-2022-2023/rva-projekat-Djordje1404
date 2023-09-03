@@ -23,7 +23,7 @@ export class PredmetDialogComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.sudService.getAllSuds().subscribe(
+    this.sudService.getAllSud().subscribe(
       data => {
         this.sudovi = data;
       }

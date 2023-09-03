@@ -11,7 +11,7 @@ export class PredmetService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllPredmets(): Observable<any>{
+  public getAllPredmet(): Observable<any>{
     return this.httpClient.get(`${PREDMET_URL}`);
   }
 

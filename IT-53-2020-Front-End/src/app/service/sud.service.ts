@@ -11,7 +11,7 @@ export class SudService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllSuds(): Observable<any>{
+  public getAllSud(): Observable<any>{
     return this.httpClient.get(`${SUD_URL}`);
   }
 

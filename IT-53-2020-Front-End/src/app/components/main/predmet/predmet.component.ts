@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { PredmetService } from './../../../service/predmet.service';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,7 +18,7 @@ import { Sud } from 'src/app/models/sud';
 export class PredmetComponent implements OnInit, OnDestroy{
   
   
-  displayColumns = ['id', 'brojPr', 'opis', 'datumPocetka', 'aktivan', 'sud', 'actions']
+  displayColumns = ['id', 'brojPr', 'opis', 'datumPocetka', 'aktivan', 'sud', 'actions'];
   dataSource!: MatTableDataSource<Predmet>;
 
   subscription!:Subscription;
@@ -39,9 +38,8 @@ export class PredmetComponent implements OnInit, OnDestroy{
   }
 
   public loadData(){
-    this.subscription = this.predmetService.getAllPredmets().subscribe(
+    this.subscription = this.predmetService.getAllPredmet().subscribe(
       data => {
-        //console.log(data);}
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -55,7 +53,7 @@ export class PredmetComponent implements OnInit, OnDestroy{
     dialogRef.componentInstance.flag = flag;
     dialogRef.afterClosed().subscribe(
       result => {
-        if(result==1){
+        if(result == 1){
           this.loadData();
         }
       }
@@ -66,7 +64,7 @@ export class PredmetComponent implements OnInit, OnDestroy{
   public applyFilter(filter:any){
     filter = filter.target.value;
     filter = filter.trim();
-    filter = filter.toLocalLowerCase();
+    filter = filter.toLocaleLowerCase();
     this.dataSource.filter = filter;
   } //dodati i za ostale komponente
 

@@ -1,4 +1,4 @@
-import { ROCISTA_URL } from './../constants';
+import { UCESNIK_ROCISTE_URL } from './../constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -29,6 +29,6 @@ export class RocisteService {
   }
 
   public getRocistaforUcesnik(idUcesnika:number): Observable<any>{
-    return this.httpClient.get(`${ROCISTA_URL}/${idUcesnika}`);
+    return this.httpClient.get(`${UCESNIK_ROCISTE_URL}/${idUcesnika}`);
   }
 }

@@ -1,10 +1,9 @@
-import { Sud } from "./sud";
-
-export class Predmet{
+import { Sud } from './sud';
+export class Predmet {
     id!: number;
-    brojPr!: string;
-    opis!: string;
-    datumPocetka!: Date;
-    aktivan!: boolean;
-    Sud!: Sud;
+	brojPr!: string;
+	opis!: string;
+	datumPocetka!: Date;
+	aktivan!: boolean;
+    sud!: Sud;
 }

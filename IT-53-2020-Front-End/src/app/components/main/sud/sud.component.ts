@@ -34,7 +34,7 @@ export class SudComponent implements OnInit,OnDestroy{
   }
 
   public loadData(){
-    this.subscription = this.SudService.getAllSuds().subscribe(
+    this.subscription = this.SudService.getAllSud().subscribe(
       data => {
         //console.log(data);}
         this.dataSource = new MatTableDataSource(data);
@@ -61,7 +61,7 @@ export class SudComponent implements OnInit,OnDestroy{
   public applyFilter(filter:any){
     filter = filter.target.value;
     filter = filter.trim();
-    filter = filter.toLocalLowerCase();
+    filter = filter.toLocaleLowerCase();
     this.dataSource.filter = filter;
   } //dodati i za ostale komponente
 }

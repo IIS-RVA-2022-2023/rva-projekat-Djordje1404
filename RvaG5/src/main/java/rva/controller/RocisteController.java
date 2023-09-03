@@ -52,9 +52,9 @@ public class RocisteController {
 	
 	@GetMapping("/sudnica/{sudnica}")
 	public ResponseEntity<?> getRocisteBySudnica(@PathVariable String sudnica){
-		List<Rociste> lista = service.getBySud(sudnica).get();
+		List<Rociste> lista = service.getBySudnica(sudnica).get();
 		
-		if(!service.getBySud(sudnica).get().isEmpty()) {
+		if(!service.getBySudnica(sudnica).get().isEmpty()) {
 			return ResponseEntity.ok(lista);
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource with requested value has not been found!");

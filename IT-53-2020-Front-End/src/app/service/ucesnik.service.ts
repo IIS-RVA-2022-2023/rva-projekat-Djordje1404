@@ -11,7 +11,7 @@ export class UcesnikService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllUcesniks(): Observable<any>{
+  public getAllUcesnik(): Observable<any>{
     return this.httpClient.get(`${UCESNIK_URL}`);
   }
 
