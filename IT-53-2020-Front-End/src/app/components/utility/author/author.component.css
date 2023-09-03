@@ -1,26 +1,71 @@
-.author-container {
-    text-align: center;
-    margin-top: 50px;
+.center {
+  margin-top: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: solid 3px;
   }
-  
-  h2 {
-    font-size: 24px;
-    color: #333;
+
+.divClass
+{
+  text-align: center;
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
-  
-  img {
-    width: 200px;
-    height: auto;
-    margin: 20px 0;
+  100% {
+    -webkit-transform: none;
+    transform: none;
   }
-  
-  p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0.5;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
-  
-  a {
-    color: #007bff;
-    text-decoration: none;
+  100% {
+    opacity: 0.9;
+    -webkit-transform: none;
+    transform: none;
   }
+}
+
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fadeIn {
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
